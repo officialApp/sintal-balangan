@@ -1,0 +1,179 @@
+{
+  "project_info": {
+    "project_number": "494678481790",
+    "firebase_url": "https://kominfobalangan-d2008-default-rtdb.firebaseio.com",
+    "project_id": "kominfobalangan-d2008",
+    "storage_bucket": "kominfobalangan-d2008.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494678481790:android:7986c3896442c0f100f12f",
+        "android_client_info": {
+          "package_name": "com.ereportsederhanakominfo.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494678481790-3fl9bqeh6ji0akeah3b1kholged8k8cj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ereportsederhanakominfo.app",
+            "certificate_hash": "6b619789358609ebf82aea4cab737c97f638ea96"
+          }
+        },
+        {
+          "client_id": "494678481790-it9nrcbl4811c668mfpf6865tfqrovij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHEqbXrzMjywQLIn__m0-0ww9XTD-FmhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494678481790-2p584okkun4ao0gd0i8suiu3g0ihjbq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494678481790-qfle63go4onn2mq1anq1phu9pcj5ac6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kominfobalanganijin.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494678481790:android:c2026c98dd2ae2aa00f12f",
+        "android_client_info": {
+          "package_name": "com.kominfobalanganijin.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494678481790-dtfrff82ocf4c7lvji3einuu3bhrkijr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kominfobalanganijin.app",
+            "certificate_hash": "6b619789358609ebf82aea4cab737c97f638ea96"
+          }
+        },
+        {
+          "client_id": "494678481790-it9nrcbl4811c668mfpf6865tfqrovij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHEqbXrzMjywQLIn__m0-0ww9XTD-FmhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494678481790-2p584okkun4ao0gd0i8suiu3g0ihjbq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494678481790-qfle63go4onn2mq1anq1phu9pcj5ac6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kominfobalanganijin.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494678481790:android:00fa9ea84bdda06e00f12f",
+        "android_client_info": {
+          "package_name": "com.officialapp1.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494678481790-it9nrcbl4811c668mfpf6865tfqrovij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHEqbXrzMjywQLIn__m0-0ww9XTD-FmhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494678481790-2p584okkun4ao0gd0i8suiu3g0ihjbq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494678481790-qfle63go4onn2mq1anq1phu9pcj5ac6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kominfobalanganijin.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494678481790:android:e1e911086359ab0700f12f",
+        "android_client_info": {
+          "package_name": "com.onesignaltest.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494678481790-ucikn0uug6niuuub38ueusqngmhu1a9k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onesignaltest.app",
+            "certificate_hash": "6b619789358609ebf82aea4cab737c97f638ea96"
+          }
+        },
+        {
+          "client_id": "494678481790-it9nrcbl4811c668mfpf6865tfqrovij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHEqbXrzMjywQLIn__m0-0ww9XTD-FmhE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494678481790-2p584okkun4ao0gd0i8suiu3g0ihjbq8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494678481790-qfle63go4onn2mq1anq1phu9pcj5ac6q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kominfobalanganijin.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
