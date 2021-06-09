@@ -29,6 +29,7 @@ pnpm-debug.log*
 
 
 # Cordova
+/zcordova
 # /zcordova/platforms
 # /zcordova/plugins
 # /public/cordova.js
