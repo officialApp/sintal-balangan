@@ -7,9 +7,6 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
-  // devServer:{ // apabila deploy key ios 
-  //   https:false,
-  // },
   runtimeCompiler: true,
   chainWebpack: config => {
     config.resolve.alias.set('~', resolve('src'))
@@ -70,6 +67,6 @@ publicPath: '',
     autoRouting: {
       chunkNamePrefix: 'page-'
     },
-    cordovaPath: 'zcordova'
+    cordovaPath: 'cordova'
   }
 }

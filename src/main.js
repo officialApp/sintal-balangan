@@ -27,40 +27,40 @@ const config = {
 }; 
 firebase.initializeApp(config);
 // var db = firebase.firestore();
-var userAgent = window.navigator.userAgent;
-if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-  // iPad or iPhone
-}
-else {
+// var userAgent = window.navigator.userAgent;
+// if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+//   // iPad or iPhone
+// }
+// else {
 
-if (typeof cordova === "object") {
-  firebase.analytics();
-}else{
-  if(window.location.href.indexOf('localhost:80')!=-1){
-    firebase.analytics();
-  }
-  else{
-    firebase.analytics();
-    const messaging = firebase.messaging();
-    // Add the public key generated from the console here.
-    messaging.usePublicVapidKey("BOyWiIWmXY2AVZ-oe7InZFiYRrJDoIGet3J4ygFUAKXMg-WFi9heoPybaX3Syoa7UryLSGUtqUAj8wAdLM0pBM8");
-    messaging.requestPermission().then(() => {
-      console.log('Notification permission granted.');
-      messaging.getToken().then((token) => {
-        console.log(token);
-        localStorage.setItem('notifid',token);
-      })
-    }).catch((err) => {
-      console.log('Unable to get permission to notify.', err);
-    });
+// if (typeof cordova === "object") {
+//   firebase.analytics();
+// }else{
+//   if(window.location.href.indexOf('localhost:80')!=-1){
+//     firebase.analytics();
+//   }
+//   else{
+//     firebase.analytics();
+//     const messaging = firebase.messaging();
+//     // Add the public key generated from the console here.
+//     messaging.usePublicVapidKey("BOyWiIWmXY2AVZ-oe7InZFiYRrJDoIGet3J4ygFUAKXMg-WFi9heoPybaX3Syoa7UryLSGUtqUAj8wAdLM0pBM8");
+//     messaging.requestPermission().then(() => {
+//       console.log('Notification permission granted.');
+//       messaging.getToken().then((token) => {
+//         console.log(token);
+//         localStorage.setItem('notifid',token);
+//       })
+//     }).catch((err) => {
+//       console.log('Unable to get permission to notify.', err);
+//     });
     
-    messaging.onMessage(payload => {
-      console.log("Message received. ", payload);
-      const { title, ...options } = payload.notification;
-    });
-  }
+//     messaging.onMessage(payload => {
+//       console.log("Message received. ", payload);
+//       const { title, ...options } = payload.notification;
+//     });
+//   }
 
-}}
+// }}
 
 Vue.config.productionTip = false
 
@@ -119,5 +119,5 @@ new Vue({
 }).$mount('#app')
 
 import "./plugins/ssrno";
-import "./plugins/directives";
+// import "./plugins/directives";
 import "./plugins/Instance";

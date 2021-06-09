@@ -75,12 +75,12 @@ self.addEventListener('push', function (event) {
   console.log('push filter id nya disini',data)
   let opt = {
     body: data.content, // adalah text dari notifikasi yang lebih jelas dari title
-    icon: 'https://balangankab.go.id/icon.png', // bisa url ke luar atau local image
+    icon: 'https://infolayanans.space/api/icon.png', // bisa url ke luar atau local image
     // image: './static/icon.png', // memunculkan image di notifikasi
     dir: 'ltr', // left to right (ltr) atau right to left (rtl)
     lang: 'en-US', // standard
     vibrate: [100, 50, 200], // device bergetar apabila ada notifikasi
-    badge: 'https://balangankab.go.id/icon.png', // icon kecil di drawer
+    badge: 'https://infolayanans.space/api/icon.png', // icon kecil di drawer
     // sound: '../notif.mp3', // sound saat notifikasi masuk (belum semua support)
     //! advance option
     // tag: 'confirm-notification', // kita men set tag agar notifikasi tidak menstack di device

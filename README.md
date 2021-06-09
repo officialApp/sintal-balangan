@@ -1,39 +1,9 @@
 # officialapp
 
-```
-git clone https://github.com/kominfo-balangan/sintal-balangan.git
-```
-
-```
-cd sintal-balangan
-```
-
-
 ## Project setup
 ```
 npm install
 ```
-
-```
-cd zcordova
-```
-
-```
-npm install
-```
-
-```
-cordova platform remove ios
-cordova platform add ios
-```
-
-```
-cd ../
-npm run cordova-serve-ios
-```
-
-buka xcode lalu tambahkan team developer
-
 
 ### Compiles and hot-reloads for development
 ```

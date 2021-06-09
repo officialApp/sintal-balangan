@@ -10,7 +10,7 @@ let backend = "php"; //php, firebase, laravel
 let table = "";
 let id = "";
 let errCount = 0;
-let url = true ? "https://mediacenter.balangankab.go.id" : 'http://localhost:8080/autos';
+let url = false ? "https://upload.egov.balangankab.go.id" : 'http://localhost:8080/autos';
 let urlBASE = url + "/apis.php";
 let urlupload = url+'/upload1.php';
 class autophp {

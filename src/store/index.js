@@ -4,7 +4,6 @@ import firebase from 'firebase';
 import router from '../router'
 // ! NOTE $router tidak ada di sini jadi gunakan router.push dari import router
 
-
 import axios from 'axios';
 import autophp from '@/plugins/autophp.js'
 let sdb = new autophp();
@@ -15,11 +14,18 @@ Vue.use(Vuex)
 let keys = require('../application-keys.json')
 const createStore = () => {
   return new Vuex.Store({
-    modules: {},
+    modules: {
+    },
     // plugins: [new VuexPersistence().plugin],
     state: {
       name: 'taufik',
+      detail_tempat:false,
+      title_tempat:{},
       wali: false,
+      gps: {
+        latitude:'',
+        longitude:''
+      },
       wali_kelas: false,
       notifikasi: [],
       notifikasiContoh: {
@@ -69,11 +75,11 @@ const createStore = () => {
         console.log(data)
         state.drivers.driver = data
       },
-      changebusy(state, data) {
-        state.busy = data
+      changebusy(state,data){
+        state.busy=data
       },
-      changegps(state, data) {
-        state.watchgps = data
+      changegps(state,data){
+        state.watchgps=data
       },
       inputRequest(state, data) {
         // let clone = this.$_.clone(data); //item vue object
@@ -230,77 +236,63 @@ const createStore = () => {
         }
       },
       notifikasi(vcon, datas) {
-        console.log('datas', datas)
-        datas.createdAt = new Date();
+        console.log('datas',datas)
+        datas.createdAt=new Date();
         datas.dibaca = false
         // datas.to = datas.to ? JSON.parse(datas.to) :''
         sdb.collection("tbuser").doc().select(`select id,fcm from tbuser where id='${datas.to.id}'`).then(res => {
-          console.log('cekfcm', res);
-          let fcm = res[0].fcm
-
-          let data = {
-            data: {
-              title: datas.title,
-              body: datas.body,
-              surveyID: "ewtawgreg-gragrag-rgarhthgbad",
-              sound: true,
-              ledColor: [255, 255, 128, 16],
-              vibrationPattern: [250, 1000, 250, 500],
-              link: datas.link,
-              android_channel_id: "test-channel",
-            },
-            to: datas.to ? fcm : '-',
-            priority: "high",
-            content_available: true
-          }
-          console.log('data', data)
-          datas.id_user = datas.to.id
-          data = JSON.stringify(data)
-          // data.to = data.to ? data.to :'-';
-          // console.log('data',data)
-          datas.to = datas.to ? datas.to : '';
-          sdb.collection('notifikasi').doc().set({
-            title:datas.title,
-            body:datas.body,
+            console.log('cekfcm',res);
+            let fcm = res[0].fcm
+        
+        let data = {
+          data: {
+            title: datas.title,
+            body: datas.body,
+            surveyID: "ewtawgreg-gragrag-rgarhthgbad",
+            sound: true,
+            ledColor: [255, 255, 128, 16],
+            vibrationPattern: [250, 1000, 250, 500],
             link:datas.link,
-            createdAt:datas.createdAt,
-            dibaca:false,
-            id_user:datas.id_user
-          }).then(res=>{
-          })
-          firebase.database().ref('/notif/sintal').set({id:datas.id_user,tanggal:new Date().getTime()}) //update
-          // firebase.firestore().collection('notifikasi').doc().set({
-          //   ...datas
-          // }, {
-          //   merge: true
-          // }).then(res => {
-          //   console.log('berhasil add')
-          // }).catch(err => {
-          //   console.log('err notifikasi', err)
-          // })
-          axios.post('https://fcm.googleapis.com/fcm/send', data, {
-            headers: {
-              Authorization: 'key=AAAAcy0im34:APA91bGbaIQENmws_cMcR49jfuzWbtb7Ab3eka_9UqM-O4W-rZeLh-DwvSemJ7miyR8272ZljPgmAFqswCGZgFTnnkxlJgsxDpddWr1rIEzX-cvvTDdON_-n3uzL0nuEQ35nKTxJ271m',
-              "Content-Type": "application/json"
-            }
-          }).then(res => {
-            this.$forceUpdate()
-          }).catch(err => {
-            console.log('err', err)
-          })
-        });
-      },
+            android_channel_id: "test-channel",
+          },
+          to: datas.to ? fcm:'-',
+          priority: "high",
+          content_available: true
+        }
+        console.log('data',data)
+        datas.id_user = datas.to.id
+        data = JSON.stringify(data)
+        // data.to = data.to ? data.to :'-';
+        // console.log('data',data)
+        datas.to = datas.to ? datas.to : '';
+        firebase.firestore().collection('notifikasi').doc().set({...datas},{merge:true}).then(res=>{
+          console.log('berhasil add')
+        }).catch(err=>{
+          console.log('err notifikasi',err)
+        })
+        axios.post('https://fcm.googleapis.com/fcm/send', data, {
+          headers: {
+            Authorization: 'key=AAAAcy0im34:APA91bGbaIQENmws_cMcR49jfuzWbtb7Ab3eka_9UqM-O4W-rZeLh-DwvSemJ7miyR8272ZljPgmAFqswCGZgFTnnkxlJgsxDpddWr1rIEzX-cvvTDdON_-n3uzL0nuEQ35nKTxJ271m',
+            "Content-Type": "application/json"
+          }
+        }).then(res => {
+          this.$forceUpdate()
+        }).catch(err=>{
+          console.log('err',err)
+        })
+      });
+    },
       mail(vcon, datas) {
-        let fd = new FormData();
-        fd.append("tujuan", datas.tujuan);
-        fd.append("subjek", datas.subjek);
-        fd.append("text", datas.text);
-        axios
-          .post("https://infolayanans.space/send_mail.php", fd)
-          .then(res => {
-            console.log(res);
-            this.$forceUpdate();
-          });
+             let fd = new FormData();
+            fd.append("tujuan", datas.tujuan);
+            fd.append("subjek", datas.subjek);
+            fd.append("text", datas.text);
+            axios
+              .post("https://infolayanans.space/send_mail.php", fd)
+              .then(res => {
+                console.log(res);
+                this.$forceUpdate();
+              });
       },
       async scramble(vcon, data) {
         let char = "";
@@ -400,7 +392,7 @@ const createStore = () => {
       ceklogin({
         commit
       }, datas) {
-        commit('changebusy', true)
+        commit('changebusy',true)
 
         return new Promise((resolve, reject) => {
           firebase.auth().onAuthStateChanged(function (user) {
@@ -413,9 +405,9 @@ const createStore = () => {
                 localStorage.setItem('users', JSON.stringify(res.data()))
                 if (datas) {
                   if (datas.true == true) {
-                    commit('changebusy', false)
+                    commit('changebusy',false)
                   } else {
-                    commit('changebusy', false)
+                    commit('changebusy',false)
                     router.push(datas.true)
                   }
                 }
@@ -424,10 +416,10 @@ const createStore = () => {
             } else {
               console.log('user tidak ada');
               if (datas.false) {
-                commit('changebusy', false)
-                router.push(datas.false)
+                    commit('changebusy',false)
+                    router.push(datas.false)
               } else {
-                commit('changebusy', false)
+                commit('changebusy',false)
 
               }
               // No user is signed in.
@@ -436,27 +428,27 @@ const createStore = () => {
         })
       },
       logout(vcon) {
-        vcon.commit('changegps', false)
+        vcon.commit('changegps',false)
         firebase
           .auth()
           .signOut()
           .then(() => {
-            // if (typeof cordova == "object") {
-            //     document.addEventListener("deviceready", function() {
-            //     ClearData.cache(function() {
-            //           console.info('Successfully cleared app cache');
-            //       }, function(err) {
-            //           console.error('Error clearing app cache', err);
-            //       });
-            //     })
-            //   }
+          // if (typeof cordova == "object") {
+          //     document.addEventListener("deviceready", function() {
+          //     ClearData.cache(function() {
+          //           console.info('Successfully cleared app cache');
+          //       }, function(err) {
+          //           console.error('Error clearing app cache', err);
+          //       });
+          //     })
+          //   }
             localStorage.setItem('expireDate', null)
             localStorage.setItem('auth._token.local', false)
             localStorage.setItem('auth.local', false)
             navigator.geolocation.clearWatch(vcon.state.watchgps);
             vcon.state.isAuth = false
             vcon.commit('logout', false)
-            router.push('/login')
+            router.push('/')
           });
         if (vcon.state.device != 'dekstop') {
           this.$auth.logout()

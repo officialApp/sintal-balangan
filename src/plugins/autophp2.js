@@ -5,14 +5,14 @@ import axios from 'axios'
 import md5 from 'md5'
 let apitoken = "borneojs";
 let auth = false; // pake auth atau tidak
-let scrambles = false; // data apakah scramble atau tidak
+let scrambles = true; // data apakah scramble atau tidak
 let backend = "php"; //php, firebase, laravel
 let table = "";
 let id = "";
 let errCount = 0;
-let url = false ? "https://upload.egov.balangankab.go.id" : 'http://localhost:8080/autos';
+let url = true ? "https://mediacenter.balangankab.go.id" : 'http://localhost:8080/autos';
 let urlBASE = url + "/apis.php";
-let urlupload = 'https://upload.egov.balangankab.go.id/upload1.php';
+let urlupload = url+'/upload1.php';
 class autophp {
    collection(tables) {
     table = tables;
@@ -44,13 +44,15 @@ class autophp {
     }
     if (auth) {
       fd.append('header', localStorage.getItem('auth._token.local'))
+      fd.append('key-h',localStorage.getItem('auth._token.local'));
     }
     // auth
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('5e19fb19a0aa66a0', scramble(auth.toString()))
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
-    fd.append("table", table);
+    // table
+    fd.append("t-bl", scramble(table));
     fd.append("backend", scramble(backend));
     if (scrambles) {
       fd.append('scramble', scrambles);
@@ -79,18 +81,19 @@ class autophp {
   async get(vdata, vdata2,auths) {
     let fd = new FormData();
     // vdata.scramble = scrambles
-    fd.append("table", table);
+    // table
+    fd.append("t-bl", scramble(table));
     fd.append("backend", scramble(backend));
     // auth
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
-    
     if(auths){
       auth=auths
     }
-    if (auths) {
+    if (auth) {
       fd.append('header', localStorage.getItem('auth._token.local'))
+      fd.append('key-h',localStorage.getItem('auth._token.local'));
     }
     fd.append('5e19fb19a0aa66a0', scramble(auth.toString()))
     // select
@@ -125,10 +128,12 @@ class autophp {
     }
     if (auth) {
       fd.append('header', localStorage.getItem('auth._token.local'))
+      fd.append('key-h',localStorage.getItem('auth._token.local'));
     }
-    fd.append("table", table);
+    // table
+    fd.append("t-bl", scramble(table));
     // auth
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('5e19fb19a0aa66a0', scramble(auth.toString()))
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
@@ -150,7 +155,7 @@ class autophp {
   async select(vdata,auths) {
     let fd = new FormData();
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
     
     if(auths){
@@ -158,8 +163,10 @@ class autophp {
     }
     if (auth) {
       fd.append('header', localStorage.getItem('auth._token.local'))
+      fd.append('key-h',localStorage.getItem('auth._token.local'));
     }
-    fd.append("table", table);
+    // table
+    fd.append("t-bl", scramble(table));
     // auth
     fd.append('5e19fb19a0aa66a0', scramble(auth.toString()))
     fd.append("backend", scramble(backend));
@@ -185,7 +192,7 @@ class autophp {
   async login(vdata, store, router, routes) {
     console.log(vdata)
     let fd = new FormData();
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append("token-u", scramble(vdata.username));
     fd.append("token-p", scramble(md5(vdata.password)));
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
@@ -200,7 +207,8 @@ class autophp {
         localStorage.setItem("auth._token.local", res.data.token);
         localStorage.setItem("auth.local", res.data.token);
         let fd2 = new FormData();
-        fd2.append('api-token', apitoken)
+        fd2.append('api-token', scramble(apitoken))
+        fd2.append('key-h',localStorage.getItem("auth._token.local"));
         fd2.append("key-z-token", scramble('getuser'));
         axios
           .post(url + '/apis.php', fd2, {
@@ -222,7 +230,7 @@ class autophp {
   }
   async login2(vdata,store,router,routes){
     let fd = new FormData();
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
     fd.append('token-u',scramble(vdata.username));
@@ -232,7 +240,8 @@ class autophp {
       localStorage.setItem("auth._token.local", res.data.token);
       localStorage.setItem("auth.local", res.data.token);
       let fd2 = new FormData();
-      fd2.append('api-token', apitoken)
+      fd2.append('api-token', scramble(apitoken))
+      fd2.append('key-h',localStorage.getItem("auth._token.local"));
       fd2.append("key-z-token", scramble('getuser'));
       axios
         .post(url + '/apis.php', fd2, {
@@ -255,7 +264,7 @@ class autophp {
   }
   async register(vdata){
     let fd = new FormData();
-    fd.append('api-token', apitoken)
+    fd.append('api-token', scramble(apitoken))
     fd.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
     fd.append('token-u',scramble(vdata.username));
@@ -266,11 +275,12 @@ class autophp {
   }
   async ceklogin(store, router) { // CEK LOGIN BACKEND PHP
     let fd2 = new FormData();
-    fd2.append('api-token', apitoken)
+    fd2.append('api-token', scramble(apitoken))
     fd2.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd2.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
     fd2.append("backend", scramble(backend));
     fd2.append("key-z-token", scramble('getuser'));
+    fd2.append('key-h',localStorage.getItem("auth._token.local"));
       return await axios
       .post(url + "/apis.php", fd2, {
         headers: {
@@ -297,11 +307,12 @@ class autophp {
   }
   async getuser(store) {
     let fd2 = new FormData();
-    fd2.append('api-token', apitoken)
+    fd2.append('api-token', scramble(apitoken))
     fd2.append('authentication', "Bearer E2-azzadoDS02389SAkas?29!asdbi3d$SIDsaiH#asjknku-JKNjkbduawdiasb-?ioh893798mskjaksjdnwiu=idbasid0asjudia" + "cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok-vyRxzUy0owj72EhAdz94kIRIMf4v4lHoFNF0tri_nmqIu4TfL8");
     fd2.append('Authorization', '"cPbt9I1_VB4:APA91bHrrUimOQ9QDOaTLUEWMHEGs8xhwCL5FYaGJhHccHYFuzlleb4RiH_7uQrFtaMXjqil9QKJhsvwod-ewMBok"')
     fd2.append("backend", scramble(backend));
     fd2.append("key-z-token", scramble('getuser'));
+    fd2.append('key-h',localStorage.getItem("auth._token.local"))
     return await axios
       .post(url + "/apis.php", fd2, {
         headers: {
@@ -327,12 +338,12 @@ class autophp {
       let file = el.files[0];
       let fd = new FormData();
       const compressedFile = await imageCompression(file, options);
-      fd.append('api-token', apitoken)
+      fd.append('api-token', scramble(apitoken))
       fd.append("file", compressedFile);
       fd.append('data', `select * from tbuser`) //database setting di server
       fd.append('secret', `dsdxxoi4#$(*#sdsaaada@#`) //database setting di server
       return await axios.post(urlupload, fd).then(res => {
-        return res.data
+        return url+res.data
         //  console.log(res.data)
         // "https://upload.egov.balangankab.go.id" + res.data;
       })

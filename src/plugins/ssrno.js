@@ -14,8 +14,9 @@ import Viewer from 'v-viewer'
 // import Buefy from 'buefy'
 Vue.use(VueCarousel)
 Vue.use(Viewer)
-// Vue.use(Buefy)
-// import 'buefy/dist/buefy.css'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+Vue.use(Buefy)
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
@@ -47,7 +48,9 @@ Vue.use(VueLazyComponent)
 // Vue.use(BootstrapVue)
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import '@/node_modules/vue-wysiwyg/dist/vueWysiwyg.css'
+import wysiwyg from "vue-wysiwyg";
+Vue.use(wysiwyg, {});
+import 'vue-wysiwyg/dist/vueWysiwyg.css'
 
 //! =========================================
 // import '@/assets/css/fontawesome.css'

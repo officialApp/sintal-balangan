@@ -12,12 +12,8 @@ background: linear-gradient(90deg, rgba(8,34,11,0.5522584033613445) 3%, rgba(1,1
   </div>
 </template>
 <script>
-import axios from "axios";
-import firebase from "firebase";
-let db = firebase.firestore()
 import autophp from '@/plugins/autophp.js'
 let sdb = new autophp()
-
 export default {
   data() {
     return {
@@ -27,33 +23,8 @@ export default {
     };
   },
   methods: {
-    mediaQueries() {
-      this.$store.commit(
-        "mediaQueries",
-        window.innerWidth <= 576
-          ? "sm"
-          : window.innerWidth <= 768
-          ? "md"
-          : window.innerWidth <= 992
-          ? "lg"
-          : "xl"
-      );
-    },
-    init() {
-      this.version();
-      this.loginOAuth();
-    }
   },
   mounted() {
-      
-     document.addEventListener(
-      "deviceready",
-      function() {
-        document.addEventListener("backbutton", function(e) {
-            e.preventDefault();
-            navigator.app.exitApp();
-            return;
-        }, false);})
     let that = this;
     function idleLogout() {
       var t;
@@ -83,15 +54,6 @@ export default {
       //gunakan scroll untuk mendeteksi nilai position
     });
     // !WOW JS
-    let recaptchaScript = document.createElement("script");
-    recaptchaScript.setAttribute(
-      "src",
-      "https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"
-    );
-    document.head.appendChild(recaptchaScript);
-    setTimeout(() => {
-      new WOW().init();
-    }, 500);
     // !FCM
      document.addEventListener(
       "deviceready",
@@ -122,18 +84,13 @@ export default {
           sound:'test', // test adalah test.wav nama file sound notification
         });
         push.on("registration", function(data) {
-          // ! AMBIL data registrationId untuk ditaruh sebagai payload to : ""
-          // ! simpan data regitrationId kedatabase
           localStorage.setItem("notifid", data.registrationId);
           that.regis = data.registrationId;
           that.$forceUpdate()
           if(this.$store.state.users){
-            // db.collection('users').doc(this.$store.state.users.uid).set({fcm:data.registrationId},{merge:true}).then(res=>{
-            //   console.log("BERHASIL")
+            // sdb.collection('tbuser').doc().set({id:this.$store.state.users.id,fcm:data.registrationId}).then(res=>{
+            //     console.log(res)
             // })
-            sdb.collection('tbuser').doc().set({id:this.$store.state.users.id,fcm:data.registrationId}).then(res=>{
-                console.log(res)
-            })
             
           }
           // Simpan data.registrationId KE DATABASE DENGAN GANDENGAN ID USER untuk di tembak dengan payload {to : ""} firebase
@@ -148,8 +105,7 @@ export default {
             // console.log('error:', e);
           }
         );
-        push.on("notification", function(data) {
-        });
+        push.on("notification", function(data) {});
         push.on("error", function(e) {
           console.log(e.message);
         });
@@ -158,32 +114,37 @@ export default {
     );
     // !END WOW JS
     // #CORDOVA
-    // if (typeof cordova === "object") {
-    //   document.addEventListener("deviceready", function() {
-    //     cordova.plugins.backgroundMode.enable();
-    //     cordova.plugins.backgroundMode.on("EVENT", function() {
-    //     });
-    //     window.powerManagement.dim(
-    //       function() {
-    //         console.log("Wakelock acquired");
-    //       },
-    //       function() {
-    //         console.log("Failed to acquire wakelock");
-    //       }
-    //     );
-    //     cordova.plugins.backgroundMode.setDefaults({
-    //       title: "HELLO",
-    //       text: "World",
-    //       hidden: true,
-    //       silent: true
-    //     });
-    //     cordova.plugins.notification.local.setDefaults({
-    //       led: { color: "#FF00FF", on: 500, off: 500 },
-    //       vibrate: [100, 50, 200]
-    //     });
-    //   });
-    // }
-    this.mediaQueries();
+    if (typeof cordova === "object") {
+      document.addEventListener("deviceready", function() {
+        cordova.plugins.backgroundMode.enable();
+        cordova.plugins.backgroundMode.on("EVENT", function() {
+          // apabila status background process berubah maka event ini di jalankan
+        });
+        window.powerManagement.dim(
+          function() {
+            console.log("Wakelock acquired");
+          },
+          function() {
+            console.log("Failed to acquire wakelock");
+          }
+        );
+        cordova.plugins.backgroundMode.setDefaults({
+          title: "HELLO",
+          text: "World",
+          // icon: 'icon' // this will look for icon.png in platforms/android/res/drawable|mipmap
+          // color: "F14F4D", // hex format like 'F14F4D'
+          // resume: true,
+          hidden: true,
+          silent: true
+          // bigText: Boolean
+        });
+        cordova.plugins.notification.local.setDefaults({
+          led: { color: "#FF00FF", on: 500, off: 500 },
+          vibrate: [100, 50, 200]
+        });
+      });
+    }
+    // this.mediaQueries();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         that.mediaQueries();

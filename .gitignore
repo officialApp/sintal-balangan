@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-zcordova
+cordova
 /dist
 
 
@@ -24,14 +24,6 @@ pnpm-debug.log*
 *.sw?
 
 # Cordova
-# /cordova/platforms
-# /cordova/plugins
-# /public/cordova.js
-
-
-# Cordova
-/zcordova
-zcordova
-# /zcordova/platforms
-# /zcordova/plugins
-# /public/cordova.js
+/cordova/platforms
+/cordova/plugins
+/public/cordova.js

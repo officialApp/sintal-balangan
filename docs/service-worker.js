@@ -1,4 +1,4 @@
-importScripts("precache-manifest.7f24ccc904c2697ad778cf5540a6e05c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.fe75fc0ec914de8467b5ba38d6f98586.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 if (workbox) {
   console.log(`Workbox is loaded`);
@@ -77,12 +77,12 @@ self.addEventListener('push', function (event) {
   console.log('push filter id nya disini',data)
   let opt = {
     body: data.content, // adalah text dari notifikasi yang lebih jelas dari title
-    icon: 'https://balangankab.go.id/icon.png', // bisa url ke luar atau local image
+    icon: 'https://infolayanans.space/api/icon.png', // bisa url ke luar atau local image
     // image: './static/icon.png', // memunculkan image di notifikasi
     dir: 'ltr', // left to right (ltr) atau right to left (rtl)
     lang: 'en-US', // standard
     vibrate: [100, 50, 200], // device bergetar apabila ada notifikasi
-    badge: 'https://balangankab.go.id/icon.png', // icon kecil di drawer
+    badge: 'https://infolayanans.space/api/icon.png', // icon kecil di drawer
     // sound: '../notif.mp3', // sound saat notifikasi masuk (belum semua support)
     //! advance option
     // tag: 'confirm-notification', // kita men set tag agar notifikasi tidak menstack di device

@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import autophp from '@/plugins/autophp3.js'
+import autophp from '@/plugins/autophp2.js'
 let sdb = new autophp()
 export default{
   data(){
@@ -37,7 +37,7 @@ export default{
     let that =this
     //doc adalah select *
     sdb.collection("artikel").doc().get("*","order by ditulis desc limit 10").then(res => {
-        console.log('artikel',res);
+        console.log(res);
       that.beritas=res
       that.$forceUpdate()
     });
